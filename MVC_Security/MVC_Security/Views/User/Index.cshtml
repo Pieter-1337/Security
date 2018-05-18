@@ -1,0 +1,14 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>Ingelogd? : @Request.IsAuthenticated</p>
+<p>Ingelogde gebruiker : @User.Identity.Name</p>
+<p>AuthenticationType :  @User.Identity.AuthenticationType</p>
+<p>Is een admin? : @User.IsInRole("admin")</p>
+
+@Html.ActionLink("Users", "Userbeheer", "User", new { @class = "btn btn-primary"})
+@Html.ActionLink("Roles", "Rolebeheer", "User", new { @class = "btn btn-primary"})

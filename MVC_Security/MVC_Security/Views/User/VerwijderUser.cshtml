@@ -1,0 +1,17 @@
+﻿@model MVC_Security.Models.ApplicationUser 
+
+@{ 
+    ViewBag.Title = "Verwijderen";
+} 
+
+<h2> User verwijderen?</h2>
+
+@Html.LabelFor(m => m.UserName)
+@Html.DisplayFor(m => m.UserName)
+
+
+ @using (Html.BeginForm("VerwijderUserExecute", "User", new { id = Model.Id }))
+ {
+     <button type="submit" class="btn btn-success">Delete User</button>
+     @Html.ActionLink("Cancel", "Userbeheer", null, new { @class = "btn btn-danger"})
+ }
