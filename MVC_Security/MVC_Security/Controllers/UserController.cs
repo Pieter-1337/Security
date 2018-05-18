@@ -20,21 +20,7 @@ namespace MVC_Security.Controllers
             return View();
         }
 
-        public ActionResult UserDetail(string id)
-        {
-            var user = context.Users.Find(id);
-            ViewBag.userid = id;
-            ViewBag.usernaam = user.UserName;
-
-            var rolesVoorUser = new List<IdentityRole>();
-            foreach(var rol in user.Roles)
-            {
-                rolesVoorUser.Add(context.Roles.Find(rol.RoleId));
-            };
-
-            return View(rolesVoorUser);
-        }
-
+        
         public ActionResult Userbeheer()
         {
             IDbSet<ApplicationUser> alleUsers = context.Users;
@@ -56,27 +42,22 @@ namespace MVC_Security.Controllers
             base.Dispose(disposing);
         }
 
-        public ActionResult VerwijderUser(string id)
+        
+        public ActionResult UserDetail(string id)
         {
             var user = context.Users.Find(id);
-            return View(user);
+            ViewBag.userid = id;
+            ViewBag.usernaam = user.UserName;
+
+            var rolesVoorUser = new List<IdentityRole>();
+            foreach (var rol in user.Roles)
+            {
+                rolesVoorUser.Add(context.Roles.Find(rol.RoleId));
+            };
+
+            return View(rolesVoorUser);
         }
 
-        [HttpPost]
-        public ActionResult VerwijderUserExecute(string id)
-        {
-            var user = context.Users.FirstOrDefault(u => u.Id == id);
-            if( user != null)
-            {
-                context.Users.Remove(user);
-                context.SaveChanges();
-            }
-            else
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            return RedirectToAction("Userbeheer");
-        }
 
         public ActionResult VerwijderRoleForMember(string userid, string roleid)
         {
@@ -91,5 +72,28 @@ namespace MVC_Security.Controllers
             }
             return RedirectToAction("UserDetail", "User", new { id = userid });
         }
+
+        public ActionResult VerwijderUser(string id)
+        {
+            var user = context.Users.Find(id);
+            return View(user);
+        }
+
+        [HttpPost]
+        public ActionResult VerwijderUserExecute(string id)
+        {
+            var user = context.Users.FirstOrDefault(u => u.Id == id);
+            if (user != null)
+            {
+                context.Users.Remove(user);
+                context.SaveChanges();
+            }
+            else
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            return RedirectToAction("Userbeheer");
+        }
+
     }
 }

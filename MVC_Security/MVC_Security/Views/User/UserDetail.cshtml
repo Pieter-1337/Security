@@ -23,11 +23,7 @@
                 <tr>
                     <td>@role.Id</td>
                     <td>@role.Name</td>
-                    <td align="center">
-                        <a href='@Url.Action("VerwijderRoleForMember", new { userid = ViewBag.userid, roleid = role.Id })'>
-                            <img src="~/Images/delete.png" alt="verwijderen" />
-                        </a>
-                    </td>
+                    <td>@Html.ActionLink("Delete","VerwijderRoleForMember", new { userid = ViewBag.userid, roleid = role.Id }, new { @class = "btn btn-danger"})</td>
                 </tr>
             }
         </tbody>
@@ -37,4 +33,4 @@ else
 { 
     <p>User @ViewBag.usernaam behoort tot geen enkele rol.</p>
 } 
-    @Html.ActionLink("Terug naar userbeheer", "Userbeheer", null, new { @class = "btn btn-default" })
+    @Html.ActionLink("Terug naar userbeheer", "Userbeheer", null, new { @class = "btn btn-primary" })

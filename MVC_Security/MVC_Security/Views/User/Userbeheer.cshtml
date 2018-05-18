@@ -10,6 +10,7 @@
         <tr>
             <th>ID</th>
             <th>Username</th>
+            <th>Detail</th>
             <th>Delete user</th>
         </tr>
     </thead>
@@ -20,9 +21,8 @@
             <tr>
                 <td>@gebruiker.Id</td>
                 <td>@Html.ActionLink(gebruiker.UserName, "UserDetail", new { id = gebruiker.Id })</td>
-                <td align="center">
-                    @Html.ActionLink("Delete user", "VerwijderUser", new { id = gebruiker.Id}, new { @class = "btn btn-danger"})
-                </td>
+                <td>@Html.ActionLink("Detail", "UserDetail", new { id = gebruiker.Id }, new { @class = "btn btn-warning"})</td>
+                <td>@Html.ActionLink("Delete user", "VerwijderUser", new { id = gebruiker.Id}, new { @class = "btn btn-danger"})</td>
             </tr> 
         }
     </tbody>
